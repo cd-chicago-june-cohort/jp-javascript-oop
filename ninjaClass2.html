@@ -26,14 +26,18 @@
             this.health += 10;
         }
         this.punch = function(anotherNinja) {
-            anotherNinja.health -= 5;
-            console.log(anotherNinja.name + " was punched by " + this.name + " and lost 5 Health!");
+            if (anotherNinja instanceof Ninja) {
+                anotherNinja.health -= 5;
+                console.log(anotherNinja.name + " was punched by " + this.name + " and lost 5 Health!");
+            }
         }
         this.kick = function(anotherNinja) {
-            console.log(strength);
-            let loss = 15 * strength;
-            anotherNinja.health -= loss;
-            console.log(anotherNinja.name + " was kicked by " + this.name + " and lost " + loss + " Health!");
+            if (anotherNinja instanceof Ninja) {
+                console.log(strength);
+                let loss = 15 * strength;
+                anotherNinja.health -= loss;
+                console.log(anotherNinja.name + " was kicked by " + this.name + " and lost " + loss + " Health!");
+            }
         }
     }
     // var ninja1 = new Ninja('Hyabusa');
