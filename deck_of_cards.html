@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+class Deck {
+    constructor() {
+        this.cards = this.create_deck();
+        //console.log(this.cards);
+    }
+    create_deck() {
+        let nums = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+        let suites = ["-spades", "-clubs", "-hearts", "-diamonds"];
+        let new_deck = [];
+        for (var i = 0; i < nums.length; i++) {
+            for (var j = 0; j < suites.length; j++) {
+                let new_card = nums[i] + suites[j];
+                new_deck.push(new_card);
+            }
+        }
+        //console.log(new_deck);
+        return new_deck;
+    }    
+    shuffle() {
+        var m = this.cards.length, t, i;
+
+        while (m) {
+
+            i = Math.floor(Math.random() * m--);
+
+            t = this.cards[m];
+            this.cards[m] = this.cards[i];
+            this.cards[i] = t;
+        }
+        //console.log(this.cards);
+        return this.cards;
+    }
+    reset() {
+        this.cards = this.create_deck();
+        //console.log(this.cards);
+        return this;
+    }
+    deal_random() {
+        let rand = Math.floor(Math.random() * 52);
+        let rand_card = this.cards[rand];
+        this.cards.splice(rand, 1);
+        return rand_card;
+    }
+}
+
+// var my_deck = new Deck();
+// my_deck.shuffle();
+// my_deck.deal_random();
+
+
+
+class Player {
+    constructor(name, deck) {
+        this.name = name;
+        this.deck = deck;
+        this.hand = [];
+        for (var i = 0; i < 5; i++) {
+            this.hand.push(this.deck.deal_random());
+        }
+        console.log(this.hand);
+    }
+    take_card() {
+        this.hand.push(this.deck.deal_random());
+        console.log(this.hand);
+    }
+    discard(index) {
+        this.hand.splice(index, 1);
+        console.log(this.hand);
+    }
+}
+
+var my_deck = new Deck();
+var mike = new Player("Mike", my_deck);
+mike.take_card();
+mike.discard(3);
+
+
+</script>
+</html>
